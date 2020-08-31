@@ -1,3 +1,5 @@
+const isPalindrome = require('../util/util');
+
 const Producto = require('../models/Producto');
 const { response } = require('express');
 
@@ -12,6 +14,7 @@ function filterInt(value) {
 const dataFind = ( palabraBuscada ) =>{
 
     let busqueda = null;
+
     let idNumerico = filterInt(palabraBuscada);
 
     if(palabraBuscada.length > 3 ){        
@@ -37,20 +40,29 @@ const dataFind = ( palabraBuscada ) =>{
 };
 
 const buscarProducto = async (req, res = response) => {
-
     try{
         let busqueda = dataFind(req.body.search);
         let respuesta = {
             codigo: "00",
-            productos: null
+            productos: null,
+            isPalindromo: false
         }
         if(busqueda){
             const busquedaNormalizada = JSON.stringify(busqueda);
 
-            const productos = await Producto.find({ $or : JSON.parse(busquedaNormalizada) });
+            let palabraSearchIsPalindromo = isPalindrome( req.body.search );            
+
+            let productos = await Producto.find({ $or : JSON.parse(busquedaNormalizada) });
             
             respuesta.codigo = productos && productos.length > 0 ? "00":"02";
+
+            if ( palabraSearchIsPalindromo ){
+                respuesta.isPalindromo = palabraSearchIsPalindromo;
+                productos.forEach(prod => prod.price = (prod.price / 2));
+            }
+
             respuesta.productos = productos;
+            console.log('respuesta', respuesta);
             res.json(respuesta);
         }else{
             respuesta.codigo = "01";

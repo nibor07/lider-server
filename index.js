@@ -19,7 +19,7 @@ app.use( express.static('public') );
 // Lectura y parseo del body
 app.use( express.json() );
 
-const PORT = process.env.PORT || 4000;
+const PORT = process.env.PORT || 4001;
 
 app.use('/api/buscar', require('./routes/auths'));
 

@@ -13,4 +13,4 @@ const isPalindrome = ( palabra ) =>{
     return true;
 }
 
-export default isPalindrome;
+module.exports = isPalindrome;
