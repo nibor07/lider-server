@@ -28,6 +28,6 @@ app.get('/', (req, res) =>{
     res.send('Hola Nibor')
 });
 // arrancar la app
-app.listen( port, '0,0,0,0', () => {
-    console.log(`El servidor esta funcionando en el puerto ${PORT}`);
+app.listen( port, '0.0.0.0', () => {
+    console.log(`El servidor esta funcionando en el puerto ${port}`);
 })
