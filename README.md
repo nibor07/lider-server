@@ -1,2 +1,2 @@
-# lider-server
-Servidor para el desafio wallmart
+# reto-server
+Backend para el reto de walmart.
