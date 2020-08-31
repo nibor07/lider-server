@@ -19,7 +19,7 @@ app.use( express.static('public') );
 // Lectura y parseo del body
 app.use( express.json() );
 
-const PORT = process.env.PORT || 4001;
+const port = process.env.port || 4000;
 
 app.use('/api/buscar', require('./routes/auths'));
 
@@ -28,6 +28,6 @@ app.get('/', (req, res) =>{
     res.send('Hola Nibor')
 });
 // arrancar la app
-app.listen(PORT, () => {
+app.listen( port, '0,0,0,0', () => {
     console.log(`El servidor esta funcionando en el puerto ${PORT}`);
 })
