@@ -1,4 +1,5 @@
 const Producto = require('../models/Producto');
+const { response } = require('express');
 
 function filterInt(value) {
     if (/^[-+]?(\d+|Infinity)$/.test(value)) {
@@ -35,7 +36,7 @@ const dataFind = ( palabraBuscada ) =>{
     return busqueda;
 };
 
-exports.buscarProducto = async (req, res) => {
+const buscarProducto = async (req, res = response) => {
 
     try{
         let busqueda = dataFind(req.body.search);
@@ -59,4 +60,8 @@ exports.buscarProducto = async (req, res) => {
         console.error(error);
         res.status(400).json({ msg: 'Hubo un error en la busqueda del producto'});
     }
+}
+
+module.exports = {
+    buscarProducto
 }

@@ -13,11 +13,15 @@ conectarDB();
 //Habilitar Cors
 app.use(cors());
 
-app.use(express.json({ extended: true }));
+// Directorio Público
+app.use( express.static('public') );
+
+// Lectura y parseo del body
+app.use( express.json() );
 
 const PORT = process.env.PORT || 4000;
 
-app.use('/api/buscar', require('./routes/ruta'));
+app.use('/api/buscar', require('./routes/auths'));
 
 // Definir la página main
 app.get('/', (req, res) =>{
